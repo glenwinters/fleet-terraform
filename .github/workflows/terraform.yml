@@ -29,11 +29,11 @@ jobs:
         with:
           cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
 
-      - name: Select Terraform workspace (staging)
-        run: terraform workspace select fleet-staging
-
       - name: Terraform Init
         run: terraform init
+
+      - name: Select Terraform workspace (staging)
+        run: terraform workspace select fleet-staging
 
       - name: Terraform Format
         run: terraform fmt -check
