@@ -2,6 +2,12 @@
 
 Terraform for Fleet infrastructure
 
+Links:
+
+- [Hashicorp: Provision a GKE Cluster](https://learn.hashicorp.com/tutorials/terraform/gke?in=terraform/kubernetes&utm_source=WEBSITE&utm_medium=WEB_IO&utm_offer=ARTICLE_PAGE&utm_content=DOCS)
+- [How to: Kubernetes for Cheap on Google Cloud](https://dev.to/verkkokauppacom/how-to-kubernetes-for-cheap-on-google-cloud-1aei)
+- [Terraform.io: Using GKE with Terraform](https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/using_gke_with_terraform)
+
 ## CI
 
 Each commit on a pull request will trigger a format check and plan.
