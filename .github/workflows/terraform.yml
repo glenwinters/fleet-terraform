@@ -31,7 +31,8 @@ jobs:
 
       - name: Terraform Init
         run: terraform init
-        env: TF_WORKSPACE=fleet-staging
+        env:
+          TF_WORKSPACE: fleet-staging
 
       - name: Terraform Format
         run: terraform fmt -check
