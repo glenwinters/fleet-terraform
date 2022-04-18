@@ -32,26 +32,26 @@ jobs:
       - name: Terraform Init
         run: terraform init
         env:
-          TF_WORKSPACE: fleet-staging
+          TF_WORKSPACE: fleet-production
 
       - name: Terraform Format
         run: terraform fmt -check
 
-      - name: Terraform Plan (staging)
-        run: terraform plan -input=false -var-file=./env/staging.tfvars
-        env:
-          TF_WORKSPACE: fleet-staging
+      # - name: Terraform Plan (staging)
+      #   run: terraform plan -input=false -var-file=./env/staging.tfvars
+      #   env:
+      #     TF_WORKSPACE: fleet-staging
+
+      # - name: Terraform Apply (staging)
+      #   if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+      #   run: terraform apply -auto-approve -input=false -var-file=./env/staging.tfvars
+      #   env:
+      #     TF_WORKSPACE: fleet-staging
 
       - name: Terraform Plan (production)
         run: terraform plan -input=false -var-file=./env/production.tfvars
         env:
           TF_WORKSPACE: fleet-production
-
-      - name: Terraform Apply (staging)
-        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        run: terraform apply -auto-approve -input=false -var-file=./env/staging.tfvars
-        env:
-          TF_WORKSPACE: fleet-staging
 
       - name: Terraform Apply (production)
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
