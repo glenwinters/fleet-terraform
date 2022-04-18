@@ -39,7 +39,11 @@ jobs:
 
       - name: Terraform Plan (staging)
         run: terraform plan -input=false -var-file=./env/staging.tfvars
+        env:
+          TF_WORKSPACE: fleet-staging
 
       - name: Terraform Apply (staging)
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: terraform apply -auto-approve -input=false -var-file=./env/staging.tfvars
+        env:
+          TF_WORKSPACE: fleet-staging
