@@ -25,14 +25,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - id: auth-production
-        name: Authenticate to Google Cloud (production)
-        uses: google-github-actions/auth@v0.4.0
-        with:
-          workload_identity_provider: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER_PRODUCTION }}
-          service_account: ${{ secrets.GCP_SERVICE_ACCOUNT_PRODUCTION }}
-          token_format: access_token
-
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1
         with:
@@ -61,13 +53,13 @@ jobs:
         run: terraform plan -input=false -var-file=./env/production.tfvars
         env:
           TF_WORKSPACE: fleet-production
-          TF_VAR_gcp_project_id: ${{ secrets.GCP_PROJECT_ID_PRODUCTION }}
-          TF_VAR_gcp_access_token: ${{ steps.auth-production.outputs.access_token }}
+          TF_VAR_aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          TF_VAR_aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
       - name: Terraform Apply (production)
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: terraform apply -auto-approve -input=false -var-file=./env/production.tfvars
         env:
           TF_WORKSPACE: fleet-production
-          TF_VAR_gcp_project_id: ${{ secrets.GCP_PROJECT_ID_PRODUCTION }}
-          TF_VAR_gcp_access_token: ${{ steps.auth-production.outputs.access_token }}
+          TF_VAR_aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          TF_VAR_aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
