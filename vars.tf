@@ -1,10 +1,10 @@
-variable "gcp_project_id" {
+variable "aws_access_key" {
   type        = string
-  description = "Google Cloud Platform (GCP) project ID used for the provider"
+  description = "AWS access key ID"
 }
 
-variable "gcp_access_token" {
+variable "aws_secret_key" {
   type        = string
-  description = "Google Cloud Platform (GCP) access token used for the provider"
+  description = "AWS secret access key"
   sensitive   = true
 }
